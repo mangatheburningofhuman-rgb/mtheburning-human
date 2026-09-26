@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>THE BURNING HUMAN</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#050505;
+    color:white;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#080808;
+    border-bottom:2px solid #e50914;
+    padding:18px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:#ff2020;
+    font-size:23px;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+}
+
+nav a:hover{
+    color:#ff2020;
+}
+
+.hero{
+    min-height:75vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:80px 20px;
+
+    background:
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.92)),
+    url("a_stylized_high_contrast_manga_anime_black_and_wh.png");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero h1{
+    font-size:60px;
+    text-shadow:4px 4px #e50914;
+}
+
+.hero h2{
+    color:#ff2020;
+    margin:20px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    line-height:2;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:13px 28px;
+    background:#e50914;
+    color:white;
+    border:0;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:white;
+    color:#e50914;
+}
+
+section{
+    padding:70px 7%;
+}
+
+.title{
+    text-align:center;
+    color:#ff2020;
+    font-size:38px;
+    margin-bottom:40px;
+}
+
+.chapters{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+}
+
+.chapter{
+    background:#111;
+    border:1px solid #333;
+    border-radius:12px;
+    padding:28px;
+    text-align:center;
+}
+
+.chapter:hover{
+    border-color:#e50914;
+    box-shadow:0 0 25px rgba(229,9,20,.3);
+}
+
+.chapter-number{
+    color:#e50914;
+    margin-bottom:12px;
+}
+
+.chapter h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.chapter p{
+    color:#999;
+    margin-bottom:15px;
+}
+
+.read{
+    display:inline-block;
+    padding:11px 25px;
+    background:#e50914;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.delete{
+    margin-top:12px;
+    padding:8px 15px;
+    background:#222;
+    color:#ff5555;
+    border:1px solid #555;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.add-section{
+    background:#0d0d0d;
+}
+
+.add-box{
+    max-width:600px;
+    margin:auto;
+    background:#151515;
+    padding:30px;
+    border-radius:12px;
+    border:1px solid #333;
+}
+
+label{
+    display:block;
+    margin:12px 0 6px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    background:#222;
+    color:white;
+    border:1px solid #444;
+    border-radius:6px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#e50914;
+}
+
+.info{
+    margin-top:20px;
+    color:#999;
+    line-height:1.8;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    border-top:2px solid #e50914;
+    color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<header>
+
+<div class="logo">
+🔥 THE BURNING HUMAN
+</div>
+
+<nav>
+<a href="#home">الرئيسية</a>
+<a href="#chapters">الفصول</a>
+<a href="#add">إضافة فصل</a>
+</nav>
+
+</header>
+
+
+
+<section class="hero" id="home">
+
+<div>
+
+<h1>
+THE BURNING HUMAN
+</h1>
+
+<h2>
+مانجا إنسان مشتعل
+</h2>
+
+<p>
+عالم مليء بالغموض والقوة والصراع.
+تابع أحداث مانجا إنسان مشتعل واقرأ الفصول.
+</p>
+
+<a href="#chapters" class="btn">
+🔥 مشاهدة الفصول
+</a>
+
+</div>
+
+</section>
+
+
+
+<section id="chapters">
+
+<h2 class="title">
+📚 فصول المانجا
+</h2>
+
+<div class="chapters" id="chapterList">
+
+</div>
+
+</section>
+
+
+
+<section class="add-section" id="add">
+
+<h2 class="title">
+➕ إضافة فصل جديد
+</h2>
+
+<div class="add-box">
+
+<label>
+رقم الفصل
+</label>
+
+<input
+type="number"
+id="chapterNumber"
+placeholder="مثال: 1"
+>
+
+
+<label>
+اسم الفصل
+</label>
+
+<input
+type="text"
+id="chapterTitle"
+placeholder="مثال: البقعة التي تحركت"
+>
+
+
+<label>
+اختر ملف PDF
+</label>
+
+<input
+type="file"
+id="chapterFile"
+accept=".pdf,application/pdf"
+>
+
+
+<button
+class="btn"
+onclick="addChapter()">
+
+➕ إضافة الفصل
+
+</button>
+
+
+<p class="info">
+
+اختر ملف الـPDF مباشرة من الكمبيوتر.
+لا تحتاج إلى كتابة اسم الملف أو مساره.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+© 2026 THE BURNING HUMAN
+<br>
+جميع الحقوق محفوظة
+
+</footer>
+
+
+
+<script>
+
+
+/* ==========================
+   قاعدة بيانات الموقع
+========================== */
+
+let db;
+
+const request =
+indexedDB.open("BurningHumanDB",1);
+
+
+request.onupgradeneeded=function(event){
+
+db=event.target.result;
+
+if(!db.objectStoreNames.contains("chapters")){
+
+db.createObjectStore(
+"chapters",
+{
+keyPath:"id",
+autoIncrement:true
+}
+);
+
+}
+
+};
+
+
+request.onsuccess=function(event){
+
+db=event.target.result;
+
+displayChapters();
+
+};
+
+
+
+/* ==========================
+   إضافة فصل
+========================== */
+
+function addChapter(){
+
+const number=
+document.getElementById(
+"chapterNumber"
+).value;
+
+const title=
+document.getElementById(
+"chapterTitle"
+).value;
+
+const fileInput=
+document.getElementById(
+"chapterFile"
+);
+
+const file=
+fileInput.files[0];
+
+
+if(!number || !title || !file){
+
+alert(
+"⚠️ اكتب رقم الفصل واسم الفصل واختر ملف PDF"
+);
+
+return;
+
+}
+
+
+const transaction=
+db.transaction(
+["chapters"],
+"readwrite"
+);
+
+const store=
+transaction.objectStore(
+"chapters"
+);
+
+
+store.add({
+
+number:Number(number),
+
+title:title,
+
+fileName:file.name,
+
+file:file
+
+});
+
+
+transaction.oncomplete=function(){
+
+document.getElementById(
+"chapterNumber"
+).value="";
+
+document.getElementById(
+"chapterTitle"
+).value="";
+
+document.getElementById(
+"chapterFile"
+).value="";
+
+displayChapters();
+
+alert(
+"🔥 تم إضافة الفصل بنجاح"
+);
+
+};
+
+}
+
+
+
+/* ==========================
+   عرض الفصول
+========================== */
+
+function displayChapters(){
+
+const list=
+document.getElementById(
+"chapterList"
+);
+
+list.innerHTML="";
+
+
+const transaction=
+db.transaction(
+["chapters"],
+"readonly"
+);
+
+const store=
+transaction.objectStore(
+"chapters"
+);
+
+
+const request=
+store.getAll();
+
+
+request.onsuccess=function(){
+
+let chapters=
+request.result;
+
+
+chapters.sort(
+(a,b)=>a.number-b.number
+);
+
+
+if(chapters.length===0){
+
+list.innerHTML=`
+
+<div class="chapter">
+
+<h3>
+لا توجد فصول بعد
+</h3>
+
+<p>
+أضف أول فصل من الأسفل.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+chapters.forEach(function(chapter){
+
+const card=
+document.createElement("div");
+
+card.className="chapter";
+
+
+const url=
+URL.createObjectURL(
+chapter.file
+);
+
+
+card.innerHTML=`
+
+<div class="chapter-number">
+
+الفصل ${chapter.number}
+
+</div>
+
+
+<h3>
+
+${escapeHTML(chapter.title)}
+
+</h3>
+
+
+<p>
+
+${escapeHTML(chapter.fileName)}
+
+</p>
+
+
+<a
+class="read"
+href="${url}"
+target="_blank">
+
+📖 قراءة الفصل
+
+</a>
+
+
+<br>
+
+
+<button
+class="delete"
+onclick="deleteChapter(${chapter.id})">
+
+🗑️ حذف
+
+</button>
+
+`;
+
+
+list.appendChild(card);
+
+});
+
+};
+
+}
+
+
+
+/* ==========================
+   حذف فصل
+========================== */
+
+function deleteChapter(id){
+
+if(
+!confirm(
+"هل تريد حذف هذا الفصل؟"
+)
+){
+
+return;
+
+}
+
+
+const transaction=
+db.transaction(
+["chapters"],
+"readwrite"
+);
+
+const store=
+transaction.objectStore(
+"chapters"
+);
+
+store.delete(id);
+
+
+transaction.oncomplete=function(){
+
+displayChapters();
+
+};
+
+}
+
+
+
+/* ==========================
+   حماية النص
+========================== */
+
+function escapeHTML(text){
+
+return text
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+</script>
+
+</body>
+</html>
